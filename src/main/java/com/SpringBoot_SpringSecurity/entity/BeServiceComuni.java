@@ -34,6 +34,13 @@ public class BeServiceComuni implements Serializable {
 
 	public BeServiceComuni() {
 	}
+	
+
+	@Override
+	public String toString() {
+		return "BeServiceComuni [id=" + id + ", nome=" + nome + " ]";
+	}
+
 
 	public Long getId() {
 		return this.id;

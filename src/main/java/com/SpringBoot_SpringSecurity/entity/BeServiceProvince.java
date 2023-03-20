@@ -30,6 +30,14 @@ public class BeServiceProvince implements Serializable {
 
 	public BeServiceProvince() {
 	}
+	
+
+	@Override
+	public String toString() {
+		return "BeServiceProvince [id=" + id + ", nome=" + nome + ", sigla=" + sigla + "]";
+	}
+
+
 
 	public Long getId() {
 		return this.id;
