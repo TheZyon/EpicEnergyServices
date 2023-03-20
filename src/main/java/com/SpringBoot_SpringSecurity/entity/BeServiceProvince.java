@@ -24,9 +24,6 @@ public class BeServiceProvince implements Serializable {
 
 	private String sigla;
 
-	//bi-directional many-to-one association to BeServiceComuni
-	@OneToMany(mappedBy="beServiceProvince")
-	private List<BeServiceComuni> beServiceComunis;
 
 	public BeServiceProvince() {
 	}
@@ -63,26 +60,6 @@ public class BeServiceProvince implements Serializable {
 		this.sigla = sigla;
 	}
 
-	public List<BeServiceComuni> getBeServiceComunis() {
-		return this.beServiceComunis;
-	}
 
-	public void setBeServiceComunis(List<BeServiceComuni> beServiceComunis) {
-		this.beServiceComunis = beServiceComunis;
-	}
-
-	public BeServiceComuni addBeServiceComuni(BeServiceComuni beServiceComuni) {
-		getBeServiceComunis().add(beServiceComuni);
-		beServiceComuni.setBeServiceProvince(this);
-
-		return beServiceComuni;
-	}
-
-	public BeServiceComuni removeBeServiceComuni(BeServiceComuni beServiceComuni) {
-		getBeServiceComunis().remove(beServiceComuni);
-		beServiceComuni.setBeServiceProvince(null);
-
-		return beServiceComuni;
-	}
 
 }

@@ -30,22 +30,22 @@ public class Gruppo1Controller {
 		return "Gruppo 1 :)";
 	}
 	
-	//@PostMapping("/create")
-	//public ResponseEntity<BeServiceComuni> createComune(@RequestBody BeServiceComuni d) {
-	//	return new ResponseEntity<BeServiceComuni>(cSrv.createComune(d), HttpStatus.OK);
-	//}
-	//@PutMapping("/update")
-	//public ResponseEntity<BeServiceComuni> updateComune(@RequestBody BeServiceComuni d) {
-	//	return new ResponseEntity<BeServiceComuni>(cSrv.createComune(d), HttpStatus.OK);
-	//}
-	//@GetMapping("/all")
-	//public List<BeServiceComuni> getAllComuni() {
-	//	 return cSrv.getAllComuni();
-	//}
-	//@DeleteMapping("/delete/{id}")
-	//public ResponseEntity<String> removeComune(@PathVariable Long id) {
-	//	return new ResponseEntity<String>(cSrv.removeComune(id), HttpStatus.OK);
-	//}
+	@PostMapping("/create")
+	public ResponseEntity<BeServiceComuni> createComune(@RequestBody BeServiceComuni d) {
+		return new ResponseEntity<BeServiceComuni>(cSrv.createComune(d), HttpStatus.OK);
+	}
+	@PutMapping("/update")
+	public ResponseEntity<BeServiceComuni> updateComune(@RequestBody BeServiceComuni d) {
+		return new ResponseEntity<BeServiceComuni>(cSrv.createComune(d), HttpStatus.OK);
+	}
+	@GetMapping("/all")
+	public List<BeServiceComuni> getAllComuni() {
+		 return cSrv.getAllComuni();
+	}
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> removeComune(@PathVariable Long id) {
+		return new ResponseEntity<String>(cSrv.removeComune(id), HttpStatus.OK);
+	}
 	
 	
 	

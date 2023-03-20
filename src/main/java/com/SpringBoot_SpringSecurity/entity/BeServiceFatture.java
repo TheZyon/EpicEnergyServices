@@ -35,16 +35,12 @@ public class BeServiceFatture implements Serializable {
 	@NonNull
 	private Integer numero;
 
-	//bi-directional many-to-one association to BeServiceClienti
-	@NonNull
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private BeServiceClienti beServiceClienti;
 
-	//bi-directional many-to-one association to BeServiceStatoFattura
-/*	@NonNull
 	@ManyToOne
 	@JoinColumn(name="stato_id")
-	private BeServiceStatoFattura beServiceStatoFattura;*/
+	private BeServiceStatoFattura beServiceStatoFattura;
 
 }

@@ -65,10 +65,14 @@ public class BeServiceClienti implements Serializable {
 	@Column(name="tipo_cliente")
 	private String tipoCliente;
 
-	//bi-directional many-to-one association to BeServiceIndirizzi
+	//many-to-one association to BeServiceIndirizzi
 	@NonNull
 	@ManyToOne
 	@JoinColumn(name="indirizzo_sede_legale_id")
 	private BeServiceIndirizzi beServiceIndirizzi1;
 
+	@NonNull
+	@ManyToOne
+	@JoinColumn(name="indirizzo_sede_operativa_id")
+	private BeServiceIndirizzi beServiceIndirizzi2;
 }

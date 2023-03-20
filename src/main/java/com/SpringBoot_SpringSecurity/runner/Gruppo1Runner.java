@@ -27,7 +27,7 @@ public class Gruppo1Runner implements ApplicationRunner {
 
 	     @Override
 	     public void run(ApplicationArguments args) throws Exception {
-		 System.out.println("GruppoUnoRunning...");
+		/* System.out.println("GruppoUnoRunning...");
 		
 	     BeServiceProvince roma = prSrv.getProvinceById(2l);
 	     //System.out.println(roma);
@@ -38,19 +38,19 @@ public class Gruppo1Runner implements ApplicationRunner {
 	     BeServiceComuni comune = new BeServiceComuni();
 	     comune.setNome("Fiumicino");
 	     comune.setBeServiceIndirizzis(lista);
-	     comune.setBeServiceProvince(roma);
+	     comune.setBeServiceProvince(roma);*/
 //CREATE	//comuneSrv.createComune(comune);
 	     //BeServiceComuni comunePreso = comuneSrv.getComuneById(4l);
 	     //comunePreso.setNome("FIUMICINO");
 //UPDATE	//comuneSrv.updateComune(comunePreso);
 //DELETE	//comuneSrv.removeDispositivo(4l);
 	     
-	     List<BeServiceStatoFattura> listaFatture =  statoSrv.getAllFattura();
+	 /*    List<BeServiceStatoFattura> listaFatture =  statoSrv.getAllFattura();
 	  
 	     for (BeServiceStatoFattura f : listaFatture) {
 			//System.out.println(f);
 		}
-	     
+	     */
 	   
 		
 	}

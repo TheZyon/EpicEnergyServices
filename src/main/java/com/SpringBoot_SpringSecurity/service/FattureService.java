@@ -3,7 +3,10 @@ package com.SpringBoot_SpringSecurity.service;
 import com.SpringBoot_SpringSecurity.entity.BeServiceFatture;
 import com.SpringBoot_SpringSecurity.repository.FattureRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.action.internal.EntityActionVetoException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +27,11 @@ public class FattureService {
     public BeServiceFatture getById(long id){
         return repo.findById(id).orElseThrow(()->new EntityNotFoundException("fattura con questo id non esiste!"));
     }
-    public List<BeServiceFatture> getAll(){
-        return (List<BeServiceFatture>) repo.findAll();
+    public Page<BeServiceFatture> getAll(Pageable pageable){
+       try{ return repo.findAll(pageable);}
+       catch (Exception e){
+           throw new EntityNotFoundException("Problema nella paginazione delle entities!");
+       }
     }
 
     //update

@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="be_service_comuni")
-//@NamedQuery(name="BeServiceComuni.findAll", query="SELECT b FROM BeServiceComuni b")
+
 public class BeServiceComuni implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -23,14 +23,10 @@ public class BeServiceComuni implements Serializable {
 
 	private String nome;
 
-	//bi-directional many-to-one association to BeServiceProvince
+	//many-to-one association to BeServiceProvince
 	@ManyToOne
 	@JoinColumn(name="provincia_id")
 	private BeServiceProvince beServiceProvince;
-
-	//bi-directional many-to-one association to BeServiceIndirizzi
-	@OneToMany(mappedBy="beServiceComuni")
-	private List<BeServiceIndirizzi> beServiceIndirizzis;
 
 	public BeServiceComuni() {
 	}
@@ -66,26 +62,5 @@ public class BeServiceComuni implements Serializable {
 		this.beServiceProvince = beServiceProvince;
 	}
 
-	public List<BeServiceIndirizzi> getBeServiceIndirizzis() {
-		return this.beServiceIndirizzis;
-	}
-
-	public void setBeServiceIndirizzis(List<BeServiceIndirizzi> beServiceIndirizzis) {
-		this.beServiceIndirizzis = beServiceIndirizzis;
-	}
-
-	public BeServiceIndirizzi addBeServiceIndirizzi(BeServiceIndirizzi beServiceIndirizzi) {
-		getBeServiceIndirizzis().add(beServiceIndirizzi);
-		beServiceIndirizzi.setBeServiceComuni(this);
-
-		return beServiceIndirizzi;
-	}
-
-	public BeServiceIndirizzi removeBeServiceIndirizzi(BeServiceIndirizzi beServiceIndirizzi) {
-		getBeServiceIndirizzis().remove(beServiceIndirizzi);
-		beServiceIndirizzi.setBeServiceComuni(null);
-
-		return beServiceIndirizzi;
-	}
 
 }

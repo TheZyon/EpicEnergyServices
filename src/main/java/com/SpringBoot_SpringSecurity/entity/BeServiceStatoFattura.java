@@ -23,9 +23,7 @@ public class BeServiceStatoFattura implements Serializable {
 
 	private String nome;
 
-	//bi-directional many-to-one association to BeServiceFatture
-	@OneToMany(mappedBy="beServiceStatoFattura")
-	private List<BeServiceFatture> beServiceFattures;
+
 
 	public BeServiceStatoFattura() {
 	}
@@ -52,28 +50,6 @@ public class BeServiceStatoFattura implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public List<BeServiceFatture> getBeServiceFattures() {
-		return this.beServiceFattures;
-	}
-
-	public void setBeServiceFattures(List<BeServiceFatture> beServiceFattures) {
-		this.beServiceFattures = beServiceFattures;
-	}
-
-	public BeServiceFatture addBeServiceFatture(BeServiceFatture beServiceFatture) {
-		getBeServiceFattures().add(beServiceFatture);
-		beServiceFatture.setBeServiceStatoFattura(this);
-
-		return beServiceFatture;
-	}
-
-	public BeServiceFatture removeBeServiceFatture(BeServiceFatture beServiceFatture) {
-		getBeServiceFattures().remove(beServiceFatture);
-		beServiceFatture.setBeServiceStatoFattura(null);
-
-		return beServiceFatture;
 	}
 
 }

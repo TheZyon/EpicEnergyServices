@@ -3,6 +3,8 @@ package com.SpringBoot_SpringSecurity.controller;
 import com.SpringBoot_SpringSecurity.entity.BeServiceFatture;
 import com.SpringBoot_SpringSecurity.service.FattureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +28,8 @@ public class FattureController {
     //read
 
     @GetMapping
-    public ResponseEntity<List<BeServiceFatture>> getAll(){
-        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
-
+    public ResponseEntity<Page<BeServiceFatture>> getAll(Pageable pageable){
+        return new ResponseEntity<>(service.getAll(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
