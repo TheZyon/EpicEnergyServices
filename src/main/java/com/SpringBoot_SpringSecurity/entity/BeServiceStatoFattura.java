@@ -29,6 +29,14 @@ public class BeServiceStatoFattura implements Serializable {
 
 	public BeServiceStatoFattura() {
 	}
+	
+
+	@Override
+	public String toString() {
+		return "BeServiceStatoFattura [id=" + id + ", nome=" + nome + "]";
+	}
+
+
 
 	public Long getId() {
 		return this.id;

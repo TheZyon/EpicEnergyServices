@@ -45,6 +45,13 @@ public class BeServiceIndirizzi implements Serializable {
 	public BeServiceIndirizzi() {
 	}
 
+	@Override
+	public String toString() {
+		return "BeServiceIndirizzi [id=" + id + ", cap=" + cap + ", civico=" + civico + ", localita=" + localita
+				+ ", via=" + via + "]";
+	}
+
+
 	public Long getId() {
 		return this.id;
 	}
