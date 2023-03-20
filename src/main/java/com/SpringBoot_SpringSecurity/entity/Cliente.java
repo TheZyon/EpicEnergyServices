@@ -48,6 +48,6 @@ public class Cliente {
     @NonNull
     private TipoCliente tipoCliente;
 
-
+        //commentino
 
 }
