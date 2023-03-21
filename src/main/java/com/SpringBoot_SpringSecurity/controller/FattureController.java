@@ -56,7 +56,7 @@ public class FattureController {
    //     return new ResponseEntity<>(service.getFattureByRangeImporto(uno, due), HttpStatus.OK);
    // }
     
-    @GetMapping("/{anno}")
+    @GetMapping("/filterbyanno/{anno}")
     public ResponseEntity<Object> getByAnno(@PathVariable Integer anno){
         return new ResponseEntity<>(service.getFattureByAnno(anno), HttpStatus.OK);
     }
@@ -73,7 +73,7 @@ public class FattureController {
         return new ResponseEntity<>(service.getFattureByBeServiceStatoFattura(sf), HttpStatus.OK);
     }
     
-    @GetMapping("/{data}")
+    @GetMapping("/filterbydata/{data}")
     public ResponseEntity<Object> getByData(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Timestamp data){
     	return new ResponseEntity<>(service.getFattureByData(data), HttpStatus.OK);
     }
