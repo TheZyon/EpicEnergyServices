@@ -21,7 +21,7 @@ import com.SpringBoot_SpringSecurity.service.ComuniService;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/comuni")
-public class Gruppo1Controller {
+public class ComuneController {
 	
 	@Autowired ComuniService cSrv;
 
@@ -30,7 +30,7 @@ public class Gruppo1Controller {
 		return "Gruppo 1 :)";
 	}
 	
-	@PostMapping("/create")
+	@PostMapping
 	public ResponseEntity<BeServiceComuni> createComune(@RequestBody BeServiceComuni d) {
 		return new ResponseEntity<BeServiceComuni>(cSrv.createComune(d), HttpStatus.OK);
 	}
@@ -38,7 +38,7 @@ public class Gruppo1Controller {
 	public ResponseEntity<BeServiceComuni> updateComune(@RequestBody BeServiceComuni d) {
 		return new ResponseEntity<BeServiceComuni>(cSrv.createComune(d), HttpStatus.OK);
 	}
-	@GetMapping("/all")
+	@GetMapping
 	public List<BeServiceComuni> getAllComuni() {
 		 return cSrv.getAllComuni();
 	}
