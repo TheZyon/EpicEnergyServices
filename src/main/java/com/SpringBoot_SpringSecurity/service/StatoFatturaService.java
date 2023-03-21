@@ -16,5 +16,8 @@ public class StatoFatturaService {
 	public List<BeServiceStatoFattura> getAllFattura(){
 		return (List<BeServiceStatoFattura>) repo.findAll();
 	}
-	
+	public BeServiceStatoFattura getStatoFatturaById(Long id) {
+		BeServiceStatoFattura u = repo.findById(id).get();
+		return u;
+	}
 }
