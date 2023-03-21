@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/statofatture")
+@RequestMapping("/api/statofatture")
 public class StatoFatturaController {
 
+
     @Autowired private StatoFatturaService service;
+
 
     @GetMapping
     public ResponseEntity<List<BeServiceStatoFattura>> getAll(){
