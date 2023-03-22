@@ -3,6 +3,10 @@ package com.SpringBoot_SpringSecurity.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,9 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SpringBoot_SpringSecurity.entity.BeServiceComuni;
+import com.SpringBoot_SpringSecurity.repository.ComuniRepository;
 import com.SpringBoot_SpringSecurity.service.ComuniService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -24,6 +30,7 @@ import com.SpringBoot_SpringSecurity.service.ComuniService;
 public class ComuneController {
 	
 	@Autowired ComuniService cSrv;
+	@Autowired ComuniRepository comuniRepo;
 
 	@GetMapping("/gruppo1")
 	public String allAccess() {
@@ -40,8 +47,18 @@ public class ComuneController {
 	}
 	@GetMapping
 	public List<BeServiceComuni> getAllComuni() {
-		 return cSrv.getAllComuni();
+		 return cSrv.getAllComuni();	 
 	}
+	
+	 @GetMapping("/page/{page}")
+	    public Page<BeServiceComuni> getAllComuni(@PathVariable int page,
+	    		@RequestParam(defaultValue = "10") int size,
+	    		  @RequestParam(defaultValue = "id") String sortBy) {
+	        Pageable sortedByName = PageRequest.of(page, size, Sort.by("nome"));
+	        return comuniRepo.findAll(sortedByName);
+	    }
+	 
+	 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> removeComune(@PathVariable Long id) {
 		return new ResponseEntity<String>(cSrv.removeComune(id), HttpStatus.OK);

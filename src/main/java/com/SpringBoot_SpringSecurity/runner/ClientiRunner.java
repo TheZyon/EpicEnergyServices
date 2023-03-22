@@ -1,7 +1,7 @@
 package com.SpringBoot_SpringSecurity.runner;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +29,24 @@ public class ClientiRunner implements ApplicationRunner {
 		List<BeServiceClienti> clientiListaNome = servClienti.cercaTramiteParteNome("ante");
 		clientiListaNome.forEach(ele-> System.out.println(ele.getNomeContatto()));
 
-		//test cliente per ultimo contatto
-		List<BeServiceClienti> clientiListaUltimoContatto = servClienti.cercaTramiteDataUltimoContatto(Timestamp.valueOf("2021-03-05 14:06:43.709"));
-		clientiListaUltimoContatto.forEach(ele-> System.out.println(ele.getNomeContatto()));
+		//test cliente per ultimo contatto del metodo obsoleto (ora commentato)
+		//List<BeServiceClienti> clientiListaUltimoContatto = servClienti.cercaTramiteDataUltimoContatto(Timestamp.valueOf("2021-03-05 14:06:43.709"));
+		//clientiListaUltimoContatto.forEach(ele-> System.out.println(ele.getNomeContatto()));
 
-		//test cliente per data di inserimento
-		List<BeServiceClienti> clientiListaDataInserimento =  servClienti.cercaTramiteDataUltimoContatto(Timestamp.valueOf("2021-03-29 06:53:29.705"));
-		clientiListaDataInserimento.forEach(ele-> System.out.println(ele.getNomeContatto()));
+		//test cliente per data di inserimento del metodo obsoleto (ora commentato)
+		//List<BeServiceClienti> clientiListaDataInserimento =  servClienti.cercaTramiteDataUltimoContatto(Timestamp.valueOf("2021-03-29 06:53:29.705"));
+		//clientiListaDataInserimento.forEach(ele-> System.out.println(ele.getNomeContatto()));
+		
+		//test clienti in data specifica del cerca tramite inserimento
+		LocalDate data = LocalDate.parse("2020-10-27");
+		List<BeServiceClienti> clientiInData = servClienti.cercaTramiteInserimentoData(data);	
+		clientiInData.forEach(ele-> System.out.println(ele.getNomeContatto()));
+		
+		
+		//test clienti in data specifica del cerca tramite ultime contatto
+		LocalDate date = LocalDate.parse("2021-02-24");
+		List<BeServiceClienti> giorgio = servClienti.cercaTramiteDataUltimoContatto(date);
+		giorgio.forEach(ele-> System.out.println(ele.getNomeContatto()));
 	}
 
 }
