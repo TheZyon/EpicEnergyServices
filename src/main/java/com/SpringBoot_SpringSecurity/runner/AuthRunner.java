@@ -34,8 +34,8 @@ public class AuthRunner implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println("Run...");
-//		setRoleDefault(); //crea nel db i ruoli e popola i tre Set della classe
-//		setUserDefault(); //registra un Admin, un moderator e un user di default
+		//setRoleDefault(); //crea nel db i ruoli e popola i tre Set della classe
+		//setUserDefault(); //registra un Admin, un moderator e un user di default
 		
 	}
 	

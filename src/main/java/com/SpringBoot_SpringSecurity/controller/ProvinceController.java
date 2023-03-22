@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,17 +24,20 @@ public class ProvinceController {
 
         //create
         @PostMapping
+        @PreAuthorize("hasRole('ADMIN')")
         public ResponseEntity<BeServiceProvince> create(@RequestBody BeServiceProvince beServiceProvince){
             return new ResponseEntity<>(service.createProvince(beServiceProvince), HttpStatus.OK);
         }
 
         //read
         @GetMapping
+        @PreAuthorize("hasRole('USER')")
         public ResponseEntity<List<BeServiceProvince>> getAll(){
             return new ResponseEntity<>(service.getAllProvince(), HttpStatus.OK);
         }
         
    	 @GetMapping("/page/{page}")
+   	@PreAuthorize("hasRole('USER')")
 	    public Page<BeServiceProvince> getAllProvince(@PathVariable int page,
 	    		@RequestParam(defaultValue = "10") int size,
 	    		  @RequestParam(defaultValue = "id") String sortBy) {
@@ -43,12 +47,14 @@ public class ProvinceController {
 
         //put
         @PutMapping
+        @PreAuthorize("hasRole('ADMIN')")
         public ResponseEntity<BeServiceProvince> putProvincia(@RequestBody BeServiceProvince provincia){
             return new ResponseEntity<>(service.createProvince(provincia), HttpStatus.OK);
         }
 
         //delete
         @DeleteMapping ("/{id}")
+        @PreAuthorize("hasRole('ADMIN')")
         public ResponseEntity<BeServiceProvince> deleteProvionce(@PathVariable long id){
 
             service.removeProvince(id);
