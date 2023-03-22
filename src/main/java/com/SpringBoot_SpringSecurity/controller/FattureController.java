@@ -9,13 +9,16 @@ import com.SpringBoot_SpringSecurity.service.StatoFatturaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -48,34 +51,51 @@ public class FattureController {
         return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
     }
     
+    
    //Gruppo simo/lore
+  
+    //filtra by range importo
+    @GetMapping("/filterbyrange/{uno}/{due}")
+    public ResponseEntity<Object> getByRange(@PathVariable int uno,@PathVariable int due, Pageable pageable){
+    	pageable = PageRequest.of(0, 10, Sort.by("importo").ascending());
+    	
+        return new ResponseEntity<>(service.getFattureByRangeImporto(uno, due, pageable), HttpStatus.OK);
+    }
     
-   //RANGE ??? completare
-   // @GetMapping("/{uno}/{due}")
-   // public ResponseEntity<Page<BeServiceFatture>> getByRange(@PathVariable int uno,@PathVariable int due, Pageable pageable){
-   //     return new ResponseEntity<>(service.getFattureByRangeImporto(uno, due), HttpStatus.OK);
-   // }
-    
+    //filtra by anno
     @GetMapping("/filterbyanno/{anno}")
-    public ResponseEntity<Object> getByAnno(@PathVariable Integer anno){
-        return new ResponseEntity<>(service.getFattureByAnno(anno), HttpStatus.OK);
+    public ResponseEntity<Object> getByAnno(@PathVariable Integer anno, Pageable pageable){
+    	pageable = PageRequest.of(0, 10, Sort.by("importo").ascending());
+    	
+        return new ResponseEntity<>(service.getFattureByAnno(anno, pageable), HttpStatus.OK);
     }
     
+    //filtra by cliente
     @GetMapping("/cliente/{id}")
-    public ResponseEntity<Object> getByClienti(@PathVariable long id){
+    public ResponseEntity<Object> getByClienti(@PathVariable long id, Pageable pageable){
+    	pageable = PageRequest.of(0, 10, Sort.by("id").ascending());
+    	
     	BeServiceClienti c = cService.getById(id);
-        return new ResponseEntity<>(service.getFattureByBeServiceClienti(c), HttpStatus.OK);
+        return new ResponseEntity<>(service.getFattureByBeServiceClienti(c, pageable), HttpStatus.OK);
     }
     
+    //filtra by stato fattura
     @GetMapping("/statofattura/{id}")
-    public ResponseEntity<Object> getByStatoFattura(@PathVariable long id){
+    public ResponseEntity<Object> getByStatoFattura(@PathVariable long id, Pageable pageable){
     	BeServiceStatoFattura sf= sfService.getStatoFatturaById(id);
-        return new ResponseEntity<>(service.getFattureByBeServiceStatoFattura(sf), HttpStatus.OK);
+        return new ResponseEntity<>(service.getFattureByBeServiceStatoFattura(sf, pageable), HttpStatus.OK);
     }
     
-    @GetMapping("/filterbydata/{data}")
-    public ResponseEntity<Object> getByData(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Timestamp data){
-    	return new ResponseEntity<>(service.getFattureByData(data), HttpStatus.OK);
+    //filtra by range data (timestamp)
+    @GetMapping("/filterbydata/{dataInizio}")
+    public ResponseEntity<Object> getByData(@PathVariable LocalDate dataInizio, Pageable pageable){
+    	pageable = PageRequest.of(0, 10, Sort.by("data").ascending());
+    	
+    	Timestamp timestamp = Timestamp.valueOf(dataInizio.atStartOfDay());
+    	LocalDate dataFine = dataInizio.plusDays(1);
+    	Timestamp endTimestamp = Timestamp.valueOf(dataFine.atStartOfDay());
+    	
+    	return new ResponseEntity<>(service.getFattureByData(timestamp, endTimestamp, pageable), HttpStatus.OK);
     }
 
 
