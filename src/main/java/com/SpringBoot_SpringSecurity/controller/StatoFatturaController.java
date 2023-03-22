@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,11 +25,13 @@ public class StatoFatturaController {
 
 
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<BeServiceStatoFattura>> getAll(){
         return new ResponseEntity<>(service.getAllFattura(), HttpStatus.OK);
     }
     
 	 @GetMapping("/page/{page}")
+	 @PreAuthorize("hasRole('USER')")
 	    public Page<BeServiceStatoFattura> getAllStatoFattura(@PathVariable int page,
 	    		@RequestParam(defaultValue = "10") int size,
 	    		  @RequestParam(defaultValue = "id") String sortBy) {
