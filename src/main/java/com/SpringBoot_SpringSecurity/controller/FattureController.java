@@ -26,7 +26,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/test/fatture")
 public class FattureController {
-
     @Autowired private FattureService service;
     @Autowired private ClientiService cService;
     @Autowired private StatoFatturaService sfService;
@@ -71,9 +70,9 @@ public class FattureController {
     }
     
     //filtra by cliente
-    @GetMapping("/cliente/{id}")
-    public ResponseEntity<Object> getByClienti(@PathVariable long id, Pageable pageable){
-    	pageable = PageRequest.of(0, 10, Sort.by("id").ascending());
+    @GetMapping("/cliente/{id}/{page}")
+    public ResponseEntity<Object> getByClienti(@PathVariable long id, @PathVariable int page, @RequestParam(defaultValue = "10") int size){
+    	var pageable = PageRequest.of(page, size, Sort.by("id").ascending());
     	
     	BeServiceClienti c = cService.getById(id);
         return new ResponseEntity<>(service.getFattureByBeServiceClienti(c, pageable), HttpStatus.OK);
@@ -81,18 +80,19 @@ public class FattureController {
     
     //filtra by stato fattura
     @GetMapping("/statofattura/{id}")
-    public ResponseEntity<Object> getByStatoFattura(@PathVariable long id, Pageable pageable){
-    	BeServiceStatoFattura sf= sfService.getStatoFatturaById(id);
+    public ResponseEntity<Object> getByStatoFattura(@PathVariable long id, @PathVariable int page, @RequestParam(defaultValue = "10") int size){
+        var pageable = PageRequest.of(page, size, Sort.by("id").ascending());
+        BeServiceStatoFattura sf= sfService.getStatoFatturaById(id);
         return new ResponseEntity<>(service.getFattureByBeServiceStatoFattura(sf, pageable), HttpStatus.OK);
     }
     
     //filtra by range data (timestamp)
-    @GetMapping("/filterbydata/{dataInizio}")
-    public ResponseEntity<Object> getByData(@PathVariable LocalDate dataInizio, Pageable pageable){
-    	pageable = PageRequest.of(0, 10, Sort.by("data").ascending());
+    @GetMapping("/filterbydata/{data}")
+    public ResponseEntity<Object> getByData(@PathVariable LocalDate data, @PathVariable int page, @RequestParam(defaultValue = "10") int size){
+        var pageable = PageRequest.of(page, size, Sort.by("id").ascending());
     	
-    	Timestamp timestamp = Timestamp.valueOf(dataInizio.atStartOfDay());
-    	LocalDate dataFine = dataInizio.plusDays(1);
+    	Timestamp timestamp = Timestamp.valueOf(data.atStartOfDay());
+    	LocalDate dataFine = data.plusDays(1);
     	Timestamp endTimestamp = Timestamp.valueOf(dataFine.atStartOfDay());
     	
     	return new ResponseEntity<>(service.getFattureByData(timestamp, endTimestamp, pageable), HttpStatus.OK);
