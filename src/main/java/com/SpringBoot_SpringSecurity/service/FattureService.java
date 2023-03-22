@@ -8,7 +8,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.action.internal.EntityActionVetoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -49,24 +51,23 @@ public class FattureService {
     
     
     //Gruppo simo/lore
-    
-    public List<BeServiceFatture> getFattureByBeServiceClienti(BeServiceClienti c) {
-    	return repo.findByBeServiceClienti(c);
+    public List<BeServiceFatture> getFattureByBeServiceClienti(BeServiceClienti c, Pageable paging) {
+    	return repo.findByBeServiceClienti(c, paging);
     }
     
-    public List<BeServiceFatture> getFattureByBeServiceStatoFattura(BeServiceStatoFattura f) {
-    	return repo.findByBeServiceStatoFattura(f);	
+    public List<BeServiceFatture> getFattureByBeServiceStatoFattura(BeServiceStatoFattura f, Pageable paging) {
+    	return repo.findByBeServiceStatoFattura(f, paging);	
     }
-    public List<BeServiceFatture> getFattureByData(Timestamp d) {
-    	return repo.findByData(d);
+    public List<BeServiceFatture> getFattureByData(Timestamp d1, Timestamp d2, Pageable paging) {
+    	return repo.findByData(d1, d2, paging);
     }
-    public List<BeServiceFatture> getFattureByAnno(Integer anno) {
-    	return repo.findByAnno(anno);
+    public List<BeServiceFatture> getFattureByAnno(Integer anno, Pageable pageable) {
+    	return repo.findByAnno(anno, pageable);
     }
-    public List<BeServiceFatture> getFattureByRangeImporto(Integer uno, Integer due) {
+    public List<BeServiceFatture> getFattureByRangeImporto(Integer uno, Integer due, Pageable paging) {
     	BigDecimal a = BigDecimal.valueOf(uno);
     	BigDecimal b = BigDecimal.valueOf(due);
-    	return repo.findByRangeImporto(a, b);
+    	return repo.findByRangeImporto(a, b, paging);
     }
 
 }
