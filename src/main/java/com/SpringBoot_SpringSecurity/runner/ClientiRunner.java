@@ -51,7 +51,7 @@ public class ClientiRunner implements ApplicationRunner {
 		giorgio.forEach(ele-> System.out.println(ele.getNomeContatto()));*/
 
 
-			repo.getClientiByNomeProvincia("ROMA").forEach(res->{System.out.println(res);});
+			//repo.getClientiByNomeProvincia("FIRENZE").forEach(res->{System.out.println(res);});
 
 
 //		repo.sortClientiByNomeProvincia().forEach(res->System.out.println(res.getBeServiceIndirizzi1().getBeServiceComuni().getBeServiceProvince()));
