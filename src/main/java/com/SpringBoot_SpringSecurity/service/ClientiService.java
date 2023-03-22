@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -51,32 +53,52 @@ public class ClientiService {
 
 	}
 
-	// metodino per cercare clienti by data inserimento
-	public List<BeServiceClienti> cercaTramiteInserimentoData(Timestamp data) {
-		return repo.findByDataInserimento(data);
-	}
+	// metodino per cercare clienti by data inserimento ormai obsoleto (sostituito con un'altro cercaTramiteInserimentoData)
+	//public List<BeServiceClienti> cercaTramiteInserimentoData(Timestamp data) {
+	//	return repo.findByDataInserimento(data);
+	//}
 
-	// metodino per cercare client by data ultimo contatto
-	public List<BeServiceClienti> cercaTramiteDataUltimoContatto(Timestamp data) {
-		return repo.findByDataUltimoContatto(data);
-	}
+	// metodino per cercare client by data ultimo contatto ormai obsoleto (sostituito con un'altro cercaTramiteDataUltimoContatto)
+	//public List<BeServiceClienti> cercaTramiteDataUltimoContatto(Timestamp data) {
+	//	return repo.findByDataUltimoContatto(data);
+	//}
 
 	// metodino per filtrare by parte del nome
 	public List<BeServiceClienti> cercaTramiteParteNome(String nome) {
 		return repo.findByNomeContattoContaining(nome);
 	}
-
 	
+	//metodino per il timestamp da finire per farlo con anche gli altri metodi (per ora settato solo per data di inserimento  )
+	public List<BeServiceClienti> cercaTramiteInserimentoData(LocalDate data){
+		List<BeServiceClienti> persone = new ArrayList<BeServiceClienti>();
+		List<BeServiceClienti> listaClientiConLocaDate = new ArrayList<BeServiceClienti>();
+		persone = repo.findAll();
+		
+		for(BeServiceClienti cliente : persone) {
+			if(cliente.getDataInserimento()!=null) {
+			LocalDate dataClienti=  cliente.getDataInserimento().toLocalDateTime().toLocalDate();
+			if(data.isEqual(dataClienti)) {
+				listaClientiConLocaDate.add(cliente);
+			}
+		}
+		}
+		return listaClientiConLocaDate;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public List<BeServiceClienti> cercaTramiteDataUltimoContatto(LocalDate data){
+		List<BeServiceClienti> personeUltimoContatto = new ArrayList<BeServiceClienti>();
+		List<BeServiceClienti> listaClientiConLocaDate = new ArrayList<BeServiceClienti>();
+		personeUltimoContatto = repo.findAll();
+		
+		for(BeServiceClienti cliente : personeUltimoContatto) {
+			if(cliente.getDataInserimento()!=null) {
+				LocalDate dataClienti=  cliente.getDataUltimoContatto().toLocalDateTime().toLocalDate();
+				if(data.isEqual(dataClienti)) {
+					listaClientiConLocaDate.add(cliente);
+				}
+			}
+		}
+		return listaClientiConLocaDate;
+	}
 }
+ 

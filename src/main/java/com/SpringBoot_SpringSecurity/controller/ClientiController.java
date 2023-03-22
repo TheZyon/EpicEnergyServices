@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -31,6 +32,10 @@ public class ClientiController {
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
+	@GetMapping
+	public List<BeServiceClienti> getAllClienti() {
+		 return service.getAll();	 
+	}
 
     //read
     @GetMapping("/page/{page}")
@@ -39,7 +44,6 @@ public class ClientiController {
     		  @RequestParam(defaultValue = "id") String sortBy) {
         Pageable sortedByName = PageRequest.of(page, size, Sort.by("nomeContatto"));
         return clientiRepository.findAll(sortedByName);
-        //return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -68,15 +72,19 @@ public class ClientiController {
     
     //query ultimo contatto
     @GetMapping("/contatto/{data}")
-    public ResponseEntity<List<BeServiceClienti>> getByUltimoContatto(@PathVariable Timestamp data){
+    public ResponseEntity<List<BeServiceClienti>> getByUltimoContatto(@PathVariable LocalDate data){
     	return new ResponseEntity<>(service.cercaTramiteDataUltimoContatto(data),HttpStatus.OK);
     }
     
     //query data inserimento
     @GetMapping("/inserimento/{data}")
-    public ResponseEntity<List<BeServiceClienti>> getByDataInserimento(@PathVariable Timestamp data){
+    public ResponseEntity<List<BeServiceClienti>> getByDataInserimento(@PathVariable LocalDate data){
     	return new ResponseEntity<>(service.cercaTramiteInserimentoData(data),HttpStatus.OK);
     }
+    
+    //query 
+    
+    
 }
 
 
