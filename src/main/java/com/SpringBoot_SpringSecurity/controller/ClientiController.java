@@ -42,9 +42,10 @@ public class ClientiController {
         return  new ResponseEntity<>(service.getById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/orderByNomeProvincia")
-    public Page<BeServiceClienti> getClientiOrderedByNomeProvincia(){
-        return service.
+    @GetMapping("/orderByNomeProvincia/{page}")
+    public Page<BeServiceClienti> getClientiOrderedByNomeProvincia(@PathVariable int page, @RequestParam(defaultValue = "10") int size){
+        Pageable pageable=PageRequest.of(page,size);
+        return service.getAllOrderByNomeProvincia(pageable);
     }
 
     //update
@@ -52,29 +53,17 @@ public class ClientiController {
 
     //delete
     
-    
-    //query fatturato annuale
-//    @GetMapping("/fatturato/{fatturato_annuale}")
-//    public ResponseEntity<List<BeServiceClienti>> getByFatturato(@PathVariable BigDecimal fatturato_annuale){
-//    	return new ResponseEntity<>(service.cercaTramiteFatturato(fatturato_annuale),HttpStatus.OK);
-//    	
-//    }
-    
-    
+    //clienti filtrati per fatturato
     @GetMapping("/fatturato/{fatturato_annuale}/{page}")
     public Page<BeServiceClienti> getByFatturato(@PathVariable int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue="id") String sortBy,@PathVariable BigDecimal fatturato_annuale) {
         
     	Pageable sorting= PageRequest.of(page, size, Sort.by(sortBy));
-        
-     
-    
-    return service.cercaTramiteFatturato(fatturato_annuale, sorting);
+
+        return service.cercaTramiteFatturato(fatturato_annuale, sorting);
     
     }
-    
-    
-    
-    //query nome partiale
+
+    //clienti filtrati per nome like
     @GetMapping("/nome/{nome}/{page}")
     public Page<BeServiceClienti> getByNome(@PathVariable String nome,@PathVariable int page, @RequestParam(defaultValue = "10") int size,@RequestParam(defaultValue="id") String sortBy){
     	Pageable sorting= PageRequest.of(page, size, Sort.by(sortBy));
@@ -83,9 +72,9 @@ public class ClientiController {
     
     //query ultimo contatto
     @GetMapping("/contatto/{data}/{page}")
-    public Page<BeServiceClienti> getByUltimoContatto(@PathVariable LocalDate data,@PathVariable String nome,@PathVariable int page, @RequestParam(defaultValue = "10") int size,@RequestParam(defaultValue="id") String sortBy){
+    public Page<BeServiceClienti> getByUltimoContatto(@PathVariable LocalDate data,@PathVariable int page, @RequestParam(defaultValue = "10") int size,@RequestParam(defaultValue="id") String sortBy){
     	Pageable sorting= PageRequest.of(page, size, Sort.by(sortBy));
-    	return service.cercaTramiteInserimentoData(data, sorting);
+    	return service.cercaTramiteDataUltimoContatto(data, sorting);
     }
     
     //query data inserimento
@@ -94,13 +83,10 @@ public class ClientiController {
     	
     	
     	Pageable sorting= PageRequest.of(page, size, Sort.by(sortBy));
-    	return service.cercaTramiteDataUltimoContatto(data, sorting);
+    	return service.cercaTramiteInserimentoData(data, sorting);
     	
     }
-    
-    //query 
-    
-    
+
 }
 
 

@@ -70,19 +70,6 @@ public class ClientiService {
 
 	}
 
-	// metodino per cercare clienti by data inserimento ormai obsoleto (sostituito
-	// con un'altro cercaTramiteInserimentoData)
-	// public List<BeServiceClienti> cercaTramiteInserimentoData(Timestamp data) {
-	// return repo.findByDataInserimento(data);
-	// }
-
-	// metodino per cercare client by data ultimo contatto ormai obsoleto
-	// (sostituito con un'altro cercaTramiteDataUltimoContatto)
-	// public List<BeServiceClienti> cercaTramiteDataUltimoContatto(Timestamp data)
-	// {
-	// return repo.findByDataUltimoContatto(data);
-	// }
-
 	// metodino per filtrare by parte del nome
 	public Page<BeServiceClienti> cercaTramiteParteNome(String nome, Pageable pageable) {
 		var listaFiltrataPerNome = repo.findByNomeContattoContaining(nome);

@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/test/fatture")
 public class FattureController {
