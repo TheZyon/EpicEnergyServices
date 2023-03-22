@@ -4,6 +4,9 @@ import com.SpringBoot_SpringSecurity.entity.BeServiceClienti;
 import com.SpringBoot_SpringSecurity.repository.ClientiRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -25,13 +28,18 @@ public class ClientiService {
 	}
 
 	// read
-	public List<BeServiceClienti> getAll() {
-		return (List<BeServiceClienti>) repo.findAll();
+	public Page<BeServiceClienti> getAll(Pageable sorting) {
+		return  repo.findAll(sorting);
 	}
 
+
+	/*esempio di come trasformare una lista in una Page e settargli il Pageable */
+	public Page<BeServiceClienti> getAllOrderByNomeProvincia(Pageable pageable){
+		var listSortedClienti= repo.sortClientiByNomeProvincia();
+		Page<BeServiceClienti> sortedClientiPage = PageableExecutionUtils.getPage(listSortedClienti, pageable, () -> listSortedClienti.size());
+		return sortedClientiPage;}
 	public BeServiceClienti getById(long id) {
-		return repo.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("il cliente con questio id non esiste!"));
+		return repo.findById(id).orElseThrow(() -> new EntityNotFoundException("il cliente con questio id non esiste!"));
 	}
 
 	// put
@@ -100,5 +108,6 @@ public class ClientiService {
 		}
 		return listaClientiConLocaDate;
 	}
+
 }
  

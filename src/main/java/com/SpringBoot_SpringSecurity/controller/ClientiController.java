@@ -22,8 +22,6 @@ import java.util.List;
 public class ClientiController {
 
     @Autowired private ClientiService service;
-    @Autowired private ClientiRepository clientiRepository;
-
 
     //create
     @PostMapping
@@ -32,23 +30,21 @@ public class ClientiController {
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
-	@GetMapping
-	public List<BeServiceClienti> getAllClienti() {
-		 return service.getAll();	 
-	}
-
-    //read
-    @GetMapping("/page/{page}")
-    public Page<BeServiceClienti> getAllClienti(@PathVariable int page,
-    		@RequestParam(defaultValue = "10") int size,
-    		  @RequestParam(defaultValue = "id") String sortBy) {
-        Pageable sortedByName = PageRequest.of(page, size, Sort.by("nomeContatto"));
-        return clientiRepository.findAll(sortedByName);
+    //get all clienti con sorting di un field del cliente
+    @GetMapping("/page/{page}/{sortBy}") // --->TODO
+    public Page<BeServiceClienti> getAllClienti(@PathVariable int page, @RequestParam(defaultValue = "10") int size, @PathVariable String sortBy) {
+        Pageable sorting= PageRequest.of(page, size, Sort.by(sortBy));
+        return service.getAll(sorting);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<BeServiceClienti> getClienteById(@PathVariable long id){
         return  new ResponseEntity<>(service.getById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/orderByNomeProvincia")
+    public Page<BeServiceClienti> getClientiOrderedByNomeProvincia(){
+        return service.
     }
 
     //update

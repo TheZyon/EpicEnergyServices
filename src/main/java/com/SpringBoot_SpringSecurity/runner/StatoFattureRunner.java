@@ -15,9 +15,9 @@ public class StatoFattureRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-    var f=service.getAllFattura();
+   /* var f=service.getAllFattura();
 
-    f.forEach(sfattura->System.out.println(sfattura));
+    f.forEach(sfattura->System.out.println(sfattura));*/
 
     }
 }
