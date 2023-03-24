@@ -1,6 +1,7 @@
 package com.SpringBoot_SpringSecurity.controller;
 
 import com.SpringBoot_SpringSecurity.entity.BeServiceClienti;
+import com.SpringBoot_SpringSecurity.entity.BeServiceProvince;
 import com.SpringBoot_SpringSecurity.repository.ClientiRepository;
 import com.SpringBoot_SpringSecurity.service.ClientiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,12 @@ public class ClientiController {
     
 
     //delete
+    @DeleteMapping ("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<BeServiceClienti> deleteCliente(@PathVariable long id){
+
+        
+        return new ResponseEntity<>(service.deleteById(id), HttpStatus.OK);}
     
     //clienti filtrati per fatturato
     @GetMapping("/fatturato/{fatturato_annuale}/{page}")
