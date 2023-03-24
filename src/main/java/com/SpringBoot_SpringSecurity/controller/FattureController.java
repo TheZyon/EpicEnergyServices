@@ -106,6 +106,14 @@ public class FattureController {
     	
     	return new ResponseEntity<>(service.getFattureByData(timestamp, endTimestamp, pageable), HttpStatus.OK);
     }
+    
+    //delete
+    @DeleteMapping ("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<BeServiceFatture> deleteCliente(@PathVariable long id){
+
+        
+        return new ResponseEntity<>(service.deleteById(id), HttpStatus.OK);}
 
 
 }
