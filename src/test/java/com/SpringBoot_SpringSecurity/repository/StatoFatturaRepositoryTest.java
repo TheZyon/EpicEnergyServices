@@ -42,6 +42,15 @@ class StatoFatturaRepositoryTest {
     assertThat(statoFatturaRepository.existsByNome(nome)).isTrue();
     }
 
+    //tests CLIENTI REPOSITORY
+
+    @Test
+    void findByFatturatoAnnuale() {
+        log.info("SIZE OF CLIENTI FATTURATO IS: "+clientiRepository.findByFatturatoAnnuale(BigDecimal.valueOf(200000)).size());
+        assertThat(clientiRepository.findByFatturatoAnnuale(BigDecimal.valueOf(200000))).size().isEqualTo(1);
+    }
+
+
 
 
 
@@ -57,9 +66,9 @@ class StatoFatturaRepositoryTest {
         popolaDBFatture();
     }
     @AfterEach
-    @Test
     void logging(){
-        log.info("SIZE IS: "+ statoFatturaRepository.findAll().size());
+
+        clientiRepository.deleteAll();
     }
 
     //metodi ausiliari
