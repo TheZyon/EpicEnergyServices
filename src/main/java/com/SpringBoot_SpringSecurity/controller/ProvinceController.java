@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/province")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class ProvinceController {
 
         @Autowired private ProvinceService service;
