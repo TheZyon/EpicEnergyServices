@@ -27,6 +27,9 @@ public class ClientiService {
 		return c;
 	}
 
+	public void createAll(List<BeServiceClienti> list){
+		repo.saveAll(list);
+	}
 	// read
 	public Page<BeServiceClienti> getAll(Pageable sorting) {
 		return repo.findAll(sorting);

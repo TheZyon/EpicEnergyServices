@@ -10,4 +10,6 @@ import com.SpringBoot_SpringSecurity.entity.BeServiceStatoFattura;
 @Repository
 public interface StatoFatturaRepository extends JpaRepository<BeServiceStatoFattura, Long> {
 
+
+    public boolean existsByNome(String nome);
 }

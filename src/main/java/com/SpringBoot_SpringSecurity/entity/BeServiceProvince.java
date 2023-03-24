@@ -1,6 +1,10 @@
 package com.SpringBoot_SpringSecurity.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,6 +15,9 @@ import java.util.List;
  * 
  */
 @Entity
+@Data
+@NoArgsConstructor
+@RequiredArgsConstructor
 @Table(name="be_service_province")
 //@NamedQuery(name="BeServiceProvince.findAll", query="SELECT b FROM BeServiceProvince b")
 public class BeServiceProvince implements Serializable {
@@ -20,46 +27,10 @@ public class BeServiceProvince implements Serializable {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 
+	@NonNull
 	private String nome;
 
+	@NonNull
 	private String sigla;
-
-
-	public BeServiceProvince() {
-	}
-	
-
-	@Override
-	public String toString() {
-		return "BeServiceProvince [id=" + id + ", nome=" + nome + ", sigla=" + sigla + "]";
-	}
-
-
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return this.nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getSigla() {
-		return this.sigla;
-	}
-
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
-	}
-
-
 
 }

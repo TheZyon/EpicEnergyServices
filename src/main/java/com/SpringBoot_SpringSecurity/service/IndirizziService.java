@@ -17,7 +17,12 @@ public class IndirizziService {
 		repo.save(d);
 		return d;
 	}
-	
+
+	public void createAll(List<BeServiceIndirizzi>list){
+		repo.saveAll(list);
+	}
+
+
 	public BeServiceIndirizzi getIndirizziById(Long id) {
 		BeServiceIndirizzi u = repo.findById(id).get();
 		return u;

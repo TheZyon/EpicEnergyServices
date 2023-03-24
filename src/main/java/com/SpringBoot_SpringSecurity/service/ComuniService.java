@@ -18,7 +18,10 @@ public class ComuniService {
 		repo.save(d);
 		return d;
 	}
-	
+	public void createAll(List<BeServiceComuni>list){
+		repo.saveAll(list);
+	}
+
 	public BeServiceComuni getComuneById(Long id) {
 		BeServiceComuni u = repo.findById(id).get();
 		return u;
