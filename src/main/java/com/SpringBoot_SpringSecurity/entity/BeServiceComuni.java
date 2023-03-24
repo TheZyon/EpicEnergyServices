@@ -1,6 +1,10 @@
 package com.SpringBoot_SpringSecurity.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 
@@ -12,6 +16,9 @@ import java.util.List;
  * 
  */
 @Entity
+@Data
+@NoArgsConstructor
+@RequiredArgsConstructor
 @Table(name="be_service_comuni")
 
 public class BeServiceComuni implements Serializable {
@@ -21,46 +28,13 @@ public class BeServiceComuni implements Serializable {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 
+	@NonNull
 	private String nome;
 
 	//many-to-one association to BeServiceProvince
+	@NonNull
 	@ManyToOne
 	@JoinColumn(name="provincia_id")
 	private BeServiceProvince beServiceProvince;
-
-	public BeServiceComuni() {
-	}
-	
-
-	@Override
-	public String toString() {
-		return "BeServiceComuni [id=" + id + ", nome=" + nome + " ]";
-	}
-
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return this.nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public BeServiceProvince getBeServiceProvince() {
-		return this.beServiceProvince;
-	}
-
-	public void setBeServiceProvince(BeServiceProvince beServiceProvince) {
-		this.beServiceProvince = beServiceProvince;
-	}
-
 
 }

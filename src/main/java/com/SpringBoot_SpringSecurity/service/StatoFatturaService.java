@@ -20,4 +20,12 @@ public class StatoFatturaService {
 		BeServiceStatoFattura u = repo.findById(id).get();
 		return u;
 	}
+
+	public void createAll(List<BeServiceStatoFattura> list){
+		repo.saveAll(list);
+	}
+
+
+
+
 }

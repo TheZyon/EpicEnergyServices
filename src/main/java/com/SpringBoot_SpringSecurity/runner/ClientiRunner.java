@@ -1,10 +1,13 @@
 package com.SpringBoot_SpringSecurity.runner;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.SpringBoot_SpringSecurity.repository.ClientiRepository;
+import com.SpringBoot_SpringSecurity.service.IndirizziService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,8 +19,8 @@ import com.SpringBoot_SpringSecurity.service.ClientiService;
 @Component
 public class ClientiRunner implements ApplicationRunner {
 
-	@Autowired private ClientiRepository repo;
-	@Autowired ClientiService servClienti;
+	@Autowired private ClientiService servClienti;
+	@Autowired private IndirizziService indirizziService;
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		
@@ -56,6 +59,26 @@ public class ClientiRunner implements ApplicationRunner {
 
 //		repo.sortClientiByNomeProvincia().forEach(res->System.out.println(res.getBeServiceIndirizzi1().getBeServiceComuni().getBeServiceProvince()));
 
+	}
+
+	public void popolaDB(){
+		var list = Stream.of(
+				new BeServiceClienti("Postina", Timestamp.valueOf("1998-04-07 00:00:00"), Timestamp.valueOf("2000-04-09 00:00:00"), "pinapostina@saponettamail.com",
+						"pina@postina.it", BigDecimal.valueOf(200000), "Pina", "partitamondialicalcio",
+						"peccatidigola","criticaDellaRagionPura", "12345678", "0987654", "Affidabile", indirizziService.getIndirizziById(1l),
+						indirizziService.getIndirizziById(1l)),
+				new BeServiceClienti("Bunny", Timestamp.valueOf("2022-04-01 00:00:00"),
+						Timestamp.valueOf("2023-04-09 00:00:00"),
+						"bunnyfeticizedandromanticized@onlyfans.com", "nonèvero@gmail.com",
+						BigDecimal.valueOf(250000),
+						"Bugs","partita di testa", "peccatodiculo", "nessuna", "234567", "876543", "pericoloso",
+						indirizziService.getIndirizziById(4l),
+						indirizziService.getIndirizziById(4l)
+						)
+
+		).toList();
+
+		servClienti.createAll(list);
 	}
 
 }

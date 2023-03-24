@@ -35,10 +35,11 @@ public class BeServiceFatture implements Serializable {
 	@NonNull
 	private Integer numero;
 
+	@NonNull
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private BeServiceClienti beServiceClienti;
-
+	@NonNull
 	@ManyToOne
 	@JoinColumn(name="stato_id")
 	private BeServiceStatoFattura beServiceStatoFattura;

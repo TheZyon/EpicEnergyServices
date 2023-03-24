@@ -17,7 +17,14 @@ public class ProvinceService {
 		repo.save(d);
 		return d;
 	}
-	
+
+	public void createAll(List<BeServiceProvince> list){
+		repo.saveAll(list);
+	}
+
+
+
+
 	public BeServiceProvince getProvinceById(Long id) {
 		BeServiceProvince u = repo.findById(id).get();
 		return u;
