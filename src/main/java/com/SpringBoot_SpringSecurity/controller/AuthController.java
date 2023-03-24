@@ -16,6 +16,7 @@ import com.SpringBoot_SpringSecurity.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class AuthController {
 
     private AuthService authService;
@@ -39,8 +40,8 @@ public class AuthController {
 
     // Build Register REST API
     @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
+    public ResponseEntity<RegisterDto> register(@RequestBody RegisterDto registerDto){
         String response = authService.register(registerDto);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(registerDto, HttpStatus.CREATED);
     }
 }
